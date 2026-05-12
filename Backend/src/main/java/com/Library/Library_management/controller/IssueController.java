@@ -22,7 +22,7 @@ public class IssueController {
 
     private final IssueService issueService;
 
-    @PostMapping
+    @PostMapping("/issue-book")
     @Operation(summary = "Issue a book to a member")
     public ResponseEntity<ApiResponse<IssueResponse>> issueBook(@Valid @RequestBody IssueRequest request) {
         IssueResponse response = issueService.issueBook(request);
@@ -36,7 +36,7 @@ public class IssueController {
         return ResponseEntity.ok(new ApiResponse<>(true, "Book returned successfully", response));
     }
 
-    @GetMapping
+    @GetMapping("issue-records")
     @Operation(summary = "Get all issue records")
     public ResponseEntity<ApiResponse<List<IssueResponse>>> getAllIssues() {
         List<IssueResponse> response = issueService.getAllIssues();
