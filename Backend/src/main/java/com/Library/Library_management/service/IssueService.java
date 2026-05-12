@@ -89,18 +89,21 @@ public class IssueService {
         return mapToResponse(issueRecord);
     }
 
+    @Transactional(readOnly = true)
     public List<IssueResponse> getAllIssues() {
         return issueRecordRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<IssueResponse> getActiveIssues() {
         return issueRecordRepository.findByStatus(IssueStatus.ISSUED).stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<IssueResponse> getIssuesByMember(Long memberId) {
         if (!memberRepository.existsById(memberId)) {
             throw new ResourceNotFoundException("Member not found with id: " + memberId);
