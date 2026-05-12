@@ -55,6 +55,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ApiResponse<>(false, "Validation failed", errors), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleNoResourceFoundException(org.springframework.web.servlet.resource.NoResourceFoundException ex) {
+        return new ResponseEntity<>(new ApiResponse<>(false, "The requested URL was not found on this server.", null), HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleGlobalException(Exception ex) {
         return new ResponseEntity<>(new ApiResponse<>(false, "An internal server error occurred: " + ex.getMessage(), null), HttpStatus.INTERNAL_SERVER_ERROR);
