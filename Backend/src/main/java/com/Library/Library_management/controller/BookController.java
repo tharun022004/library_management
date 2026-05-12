@@ -22,14 +22,14 @@ public class BookController {
 
     private final BookService bookService;
 
-    @PostMapping
+    @PostMapping("/add-books")
     @Operation(summary = "Create a new book")
     public ResponseEntity<ApiResponse<BookResponse>> createBook(@Valid @RequestBody BookRequest request) {
         BookResponse response = bookService.createBook(request);
         return new ResponseEntity<>(new ApiResponse<>(true, "Book created successfully", response), HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/all-books")
     @Operation(summary = "Get all books")
     public ResponseEntity<ApiResponse<List<BookResponse>>> getAllBooks() {
         List<BookResponse> response = bookService.getAllBooks();
@@ -59,7 +59,8 @@ public class BookController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a book")
-    public ResponseEntity<ApiResponse<BookResponse>> updateBook(@PathVariable Long id, @Valid @RequestBody BookRequest request) {
+    public ResponseEntity<ApiResponse<BookResponse>> updateBook(@PathVariable Long id,
+            @Valid @RequestBody BookRequest request) {
         BookResponse response = bookService.updateBook(id, request);
         return ResponseEntity.ok(new ApiResponse<>(true, "Book updated successfully", response));
     }
