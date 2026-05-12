@@ -57,7 +57,7 @@ public class BookController {
         return ResponseEntity.ok(new ApiResponse<>(true, "Books matching keyword retrieved successfully", response));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @Operation(summary = "Update a book")
     public ResponseEntity<ApiResponse<BookResponse>> updateBook(@PathVariable Long id,
             @Valid @RequestBody BookRequest request) {
@@ -65,7 +65,7 @@ public class BookController {
         return ResponseEntity.ok(new ApiResponse<>(true, "Book updated successfully", response));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a book")
     public ResponseEntity<ApiResponse<Void>> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
